@@ -1,0 +1,125 @@
+body{
+    
+    padding: 0;
+    margin: 0;
+    background-color: rgba(0,0,0,0.1);
+    font-family: 'Titillium Web', sans-serif;
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    
+}
+/*--------------The Board -------------*/
+#board{
+    width: 500px;
+    height: 500px;
+
+}
+/*--------------new list button -------*/
+.new-list_btn {
+    cursor: pointer;
+}
+/* ------------ container ------------ */
+.container{
+    position: absolute;
+    left:100px;
+    top:100px;
+    
+    width:380px;
+    
+    background-color: #6bbedf;
+}
+
+.header{
+    cursor: move;
+    width: 380px;
+    height:200px;
+    background-color: rgb(70, 70, 210);
+}
+
+.list-title{
+    cursor: default;
+    top: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    
+    /**/
+    color: #FFF;
+    font-size: 25px;
+    font-family: 'Titillium Web', sans-serif;
+    /**/
+    border-radius: 15px 15px 15px 15px;
+    position: relative;
+    border: 2px solid rgb(1, 1, 2);
+    
+    
+    text-shadow: 1px 3px 5px #000;
+    text-align: center;
+    box-shadow: 1px 3px 5px black;
+}
+
+/* ------------ content ------------ */
+.content{
+    cursor: default;
+    width:380px;
+    height: 100px;
+    max-height:350px;
+    background-color: #FFF;
+    overflow: auto;
+}
+.content::-webkit-scrollbar { 
+    display: none; 
+}
+.content ul{
+    padding:0;
+    margin:0;
+}
+.item{
+    width:380px;
+    height: 45px;
+    min-height: 45px;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.item i.co{
+    position: absolute;
+    font-size: 25px;
+    padding-left:5px;
+    left:15px;
+    top:10px;
+}
+.item i.co:hover{
+    cursor: pointer;
+}
+.fa-check-circle{
+    color:#6eb200;
+}
+.item p.text{
+    position: absolute;
+    padding:0;
+    margin:0;
+    font-size: 20px;
+    left:50px;
+    top:5px;
+    background-color: #FFF;
+    max-width:285px;
+}
+.lineThrough{
+    text-decoration: line-through;
+    color : #ccc;
+}
+.item i.de{
+    position: absolute;
+    font-size: 25px;
+    right:15px;
+    top:10px;
+}
+.item i.de:hover{
+    color:#af0000;
+    cursor: pointer;
+}
