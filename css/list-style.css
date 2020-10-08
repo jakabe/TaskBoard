@@ -198,11 +198,36 @@ body{
     font-size: 20px;
 }
 
+/**************************************************************/
+.list {
+    background-color: #f1f1f1;
+    text-align: left;
+    border: 1px solid #d3d3d3;
+    position: absolute;
+    width: 300px;
+    z-index: 9;
+}
 
+.listheader {
+    background-color: #2196F3;
+    color: #fff;
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+}
+.refBtn {
+    width : 20px;
+    height: 20px;
+    position: absolute;
+    right:20px;
+    top: 10px;
+    cursor: default;
 
+}
 
-
-
+.refBtn:hover{
+    color:red;
+}
 
 
 
