@@ -187,6 +187,11 @@ var debugMe = true;
             document.onmouseup = null;
             document.onmousemove = null;
 
+            console.log(`   halted tracking at ${(targetElement.offsetTop - pos2)}px from top`);
+            console.log(`   halted tracking at ${(targetElement.offsetLeft - pos1)}px from left`);
+            updateListObjectCoords(targetElement);
+    
+
             //reset position variables
             pos1 = 0, 
             pos2 = 0, 
@@ -224,6 +229,8 @@ var debugMe = true;
                     var bobTitle;
                     var bobArrayOfItems;
                     var bobId;
+                    var bobTop;
+                    var bobLeft;
                     var bobj;
                     var listCode;
                     for(var i = 0 ; i < boardObject.length; i++){
@@ -239,8 +246,32 @@ var debugMe = true;
                             //For each list we need to add the list itself to the window
                             //update variables
                             bobId = bobj.listId;
+
+                            //get top and left
+                                //if condition
+                                if(bobj.listTop == null)
+                                {
+                                    f(`!!! bobj.top is null, setting bobTop=160`);
+                                    bobTop=160;
+                                } else {
+                                    bobTop = bobj.listTop;
+                                }
+                                
+                                if(bobj.listLeft ==null)
+                                {
+                                    f(`!!! bobj.left is null, setting bobLeft=0`);
+                                    bobLeft = 0;
+                                } else {
+                                    bobLeft =bobj.listLeft;
+                                }
+                            
+
+                            
                             f(`     bobId is...`);
                             f(bobId);
+
+                            f(`     bobTop = ${bobTop}`);
+                            f(`     bobLeft = ${bobLeft}`);
 
                             bobArrayOfItems = bobj.arrayOfItemsFromList;
                             f(`     bobj array is...        `);
@@ -255,7 +286,7 @@ var debugMe = true;
 
                             //now we add the list to the board
                             listCode = `
-                            <div class = "list" id="${bobId}" numberOfItems = "${bobArrayOfItems.length}" boardIndex="${i}">
+                            <div class = "list" id="${bobId}" numberOfItems = "${bobArrayOfItems.length}" boardIndex="${i}" style="top:${bobTop}px;left:${bobLeft}px">
                                 <div class = "listheader" id="${bobId}-header" onmousedown="myDragUtils.mouseDownFunction(event)">
                                     ${bobTitle}
                                     
@@ -313,7 +344,8 @@ var debugMe = true;
     *
     *
     */ 
-    if(boardData){
+    if(boardData)
+    {
         BOARD = JSON.parse(boardData);
         console.log(`### BOARD DATA EXISTS `);
         console.log(boardData);
@@ -529,14 +561,15 @@ var debugMe = true;
 
         listCode : "",
 
-        
+        top: 160,
+        left:0,
+
         addListToBoard : function() {
             f(` addListToBoard `);
             //update variables
             listArray = document.getElementsByClassName("list");
 
             //output to console for debugging
-            f(listArray);
             console.log(listArray);
             
             //if its empty then boardIndexOfElement = 0
@@ -553,11 +586,12 @@ var debugMe = true;
             //check "board" for how many lists exist
         
             var docuBoard = document.getElementsByTagName("board")[0];
-            console.log(docuBoard);
             f(` docuBoard - > ${docuBoard} `);
+            console.log(docuBoard);
+           
 
             listCode = `
-            <div class = "list" id="element-${boardIndexOfElement+1}" numberOfItems = "0" boardIndex="${boardIndexOfElement}">
+            <div class = "list" id="element-${boardIndexOfElement+1}" numberOfItems = "0" boardIndex="${boardIndexOfElement}"  style="top: 160 px; left: 0 px;">
                 <div class = "listheader" id="element-${boardIndexOfElement+1}-header" onmousedown="myDragUtils.mouseDownFunction(event)">
                     Click here to move
                     <div class = "refBtn"> 
@@ -581,6 +615,10 @@ var debugMe = true;
                 listTitleString: null,
                 listId: listIdString,
                 listIndex: null,
+                //gotta save coords
+                listTop: 160,
+                listLeft: 0,
+                //
                 arrayOfItemsFromList: []
                 }
 
@@ -599,6 +637,55 @@ var debugMe = true;
         
     }
 
+    function updateListObjectCoords(te)
+    {
+        f("   updateListObjectCoords() called");
+        console.log(te);
+        console.log(te.getAttribute("style"));
+        
+        
+        var bi = parseInt(te.getAttribute("boardIndex"));
+        console.log(BOARD[bi]);
+
+        if(boardData)
+        {
+            console.log(` FOUND `);
+            var styleString = te.getAttribute("style");
+            console.log(styleString);
+            var i_top = styleString.indexOf(";");
+            var topString = styleString.slice(0,i_top);
+            var leftString = styleString.slice(i_top+2,styleString.length-1);
+            console.log(`(${topString})`);
+            console.log(`(${leftString})`);
+            var topValue = parseInt(topString.replace("top: ","").replace("px",""));
+            var leftValue = parseInt(leftString.replace("left: ","").replace("px",""));
+            console.log(`(${topValue})`);
+            console.log(`(${leftValue})`);
+            //now to edit
+            BOARD[bi].listTop = topValue;
+            BOARD[bi].listLeft = leftValue;
+            //check
+            console.log(BOARD[bi]);
+            //now to save
+            localStorage.setItem("BOARD",JSON.stringify(BOARD));
+
+               
+            
+            
+            //if there is local data we can load it to the page with the loadBoad function
+            //loadBoard(BOARD);
+            
+            //myStorageUtils.getBoard(BOARD);
+            //newOl.callOut();
+        } else {
+            //if data isn't empty
+            console.log(`### NO BOARD DATA EXISTS`);
+            
+            
+        }
+
+
+    }
 </script>
 
 </body>
