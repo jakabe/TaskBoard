@@ -35,8 +35,8 @@ body{
         border-style: solid ;
         border-width: 1px;;
         border-color: black;
-        border-radius: 5px;;
-        margin-bottom: 0px;
+        border-radius: 5px;
+        margin: 5px;
         
     }
     /*----------------The Board -------------*/
@@ -136,17 +136,18 @@ body{
         padding:0;
         margin:0;
     }
+    
     .item{
-        width: 27vw;
-        max-width: 30vw;
-        height: 3vw;
-        min-height: 2vw;
+        width:250px;
+        max-width: 300px;
+        height: fit-content;
+        min-height: 20px;
         position: relative;
         border-bottom: 1px solid rgba(0,0,0,0.1);
         list-style: none;
         padding: 0;
-        margin: 1vw;
-        word-wrap: break-word;
+        margin: 5px;
+        
         /* font-size: x-small; */
         font-family: 'Titillium Web';
     }
@@ -166,12 +167,12 @@ body{
     .item p.text{
         position: absolute;
         padding:0;
-        margin:0;
-        font-size: 20px;
-        left: 1.5vw;
-        top: -0.5vw;
-        background-color: #FFF;
-        max-width: 20vw;
+        margin-left:0px;
+        word-wrap: break-word;
+        left: 50px;
+        top: -15px;
+       
+        
     }
     .lineThrough{
         text-decoration: line-through;
@@ -179,9 +180,11 @@ body{
     }
     .item i.de{
         position: absolute;
-        font-size: 25px;
-        right:15px;
-        top:10px;
+        font-size: 20px;
+        
+        top:0px;
+        left: 270px;
+
     }
     .item i.de:hover{
         color:#af0000;
@@ -243,8 +246,10 @@ body{
         border-color: black;
         border-radius: 20px;
         position: absolute;
-        width: 30vw;
+        min-width: 300px;
+        height: fit-content;
         z-index: 9;
+        
     }
     
     .listheader {
