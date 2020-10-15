@@ -1,50 +1,45 @@
 
 /*----------------[ Body ]---------------------*/
 body{
-    
-    padding: 0;
-        
-    margin: 0;
         
     background-color:white;
         
+
+    }
+/* the description in the body */
+.description
+{
     font-family: 'Titillium Web', sans-serif; 
-        
-    position: absolute;
-        
-    left: 100px;
-        
-    top: 100px;
-    }
-    /*-----------------[ Button ]-----------------*/
-    button {
-        position: relative;
-        left: 20px;
-        border-style: solid ;
-        border-width: 1px;;
-        border-color: black;
-        border-radius: 5px;;
-        cursor: pointer;
-        margin-bottom: 0px;
-    }
+}
+/*-----------------[ Button ]-----------------*/
+button {
+    position: relative;
+    left: 20px;
+    border-style: solid ;
+    border-width: 1px;;
+    border-color: black;
+    border-radius: 5px;;
+    cursor: pointer;
+    margin-bottom: 0px;
+}
     
-    /*----------------[ Input ]----------------*/
-    input {
-        position: relative;
-        left: 20px;
-        border-style: solid ;
-        border-width: 1px;;
-        border-color: black;
-        border-radius: 5px;
-        margin: 5px;
-        
-    }
-    /*----------------The Board -------------*/
-    #board{
-        width: 500px;
-        height: 500px;
-        background-color: white;
-    }
+/*----------------[ Input ]----------------*/
+input {
+    position: relative;
+    left: 20px;
+    border-style: solid ;
+    border-width: 1px;;
+    border-color: black;
+    border-radius: 5px;
+    margin: 5px;
+    
+}
+/*----------------The Board -------------*/
+#board{
+    width: 500px;
+    height: 500px;
+    background-color: white;
+}
     
     /* ------------ container ------------ */
     .container{
@@ -74,27 +69,7 @@ body{
         box-shadow: 5px 0px 5px black;
     }
     
-    .header-of-body-text{
-        top: 50px;
-        padding-left: 20px;
-        padding-right: 20px;
-        margin-left: 20px;
-        margin-right: 20px;
-        
-        /**/
-        color: #FFF;
-        font-size: 25px;
-        font-family: 'Titillium Web', sans-serif;
-        /**/
-        border-radius: 15px 15px 15px 15px;
-        position: relative;
-        border: 2px solid rgb(1, 1, 2);
-        
-        
-        text-shadow: 1px 3px 5px #000;
-        text-align: center;
-        box-shadow: 1px 3px 5px black;
-    }
+    
     
     .clear{
         width : 20px;
@@ -127,7 +102,7 @@ body{
         height: 350px;
         max-height:350px;
         background-color: #FFF;
-        overflow: auto;
+        
     }
     .content::-webkit-scrollbar { 
         display: none; 
@@ -137,59 +112,7 @@ body{
         margin:0;
     }
     
-    .item{
-        width:250px;
-        max-width: 300px;
-        height: fit-content;
-        min-height: 20px;
-        position: relative;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-        list-style: none;
-        padding: 0;
-        margin: 5px;
-        
-        /* font-size: x-small; */
-        font-family: 'Titillium Web';
-    }
-    .item i.co{
-        position: absolute;
-        font-size: 25px;
-        padding-left:5px;
-        left:15px;
-        top:10px;
-    }
-    .item i.co:hover{
-        cursor: pointer;
-    }
-    .fa-check-circle{
-        color:#6eb200;
-    }
-    .item p.text{
-        position: absolute;
-        padding:0;
-        margin-left:0px;
-        word-wrap: break-word;
-        left: 50px;
-        top: -15px;
-       
-        
-    }
-    .lineThrough{
-        text-decoration: line-through;
-        color : #ccc;
-    }
-    .item i.de{
-        position: absolute;
-        font-size: 20px;
-        
-        top:0px;
-        left: 270px;
-
-    }
-    .item i.de:hover{
-        color:#af0000;
-        cursor: pointer;
-    }
+    
     /* ------------ add item ------------ */
     .add-to-do{
         position: relative;
@@ -237,25 +160,34 @@ body{
         font-size: 20px;
     }
     
-    /**************************************************************/
+    /** List ** sp=10 **/
     .list {
         background-color: white;
-        text-align: left;
         border-style: solid;
         border-width: 1px;
         border-color: black;
         border-radius: 20px;
         position: absolute;
         min-width: 300px;
-        height: fit-content;
+        list-style: none;
         z-index: 9;
         
     }
-    
+
+    /** list elemens inside list class ** sp= 11 **/
+    .list li{
+        
+    }
+
+    /** list elements with the item class inside the list class div ** sp= 21 **/
+    .list li.item{
+        background-color:white;
+        
+    }
     .listheader {
         background-color: #2196F3;
-        height: 3vw;
-        color: white;
+        height: 30px;
+        
         padding: 0px;
         margin: 5px;
         cursor: move;
@@ -263,9 +195,94 @@ body{
         border-style: solid;
         border-width: 2px;
         border-color: grey;
-        border-radius: 20px 20px 20px 20px;
+        border-radius: 20px;
+        color: white;
         text-align: center;
+        font-family: 'Titillium Web', sans-serif;
+        font-size: 20px;
     }
+
+    
+
+    .item{
+        
+       
+        
+        position: relative;
+        border-radius: 20px;
+        
+        
+        
+        
+    }
+
+    .item i.co{
+        
+    }
+    .item i.co:hover{
+        cursor: pointer;
+    }
+    .fa-check-circle{
+        color:#6eb200;
+    }
+    /** paragraph text within an item class sp= 21**/
+    .item p.text{
+        display: inline-block;
+        max-width: 250px;;
+        position: absolute;
+        top: 0px;
+        left: 20px;
+        text-indent: 10px;
+        font-family: 'Titillium Web', sans-serif;
+        font-size: 16px;
+        word-break: break-all;
+       
+        margin: 0px;
+    }
+    .lineThrough{
+        text-decoration: line-through;
+        color: #ccc;
+    }
+    .item i.de{
+        position: absolute;
+        font-size: 20px;
+        
+        top:10px;
+
+        /* this way the trash can icon is all the way to the left*/
+        left: 270px;
+
+    }
+    .item i.de:hover{
+        color:#af0000;
+        cursor: pointer;
+    }
+    /** item element with position up class**/
+
+    .pUp {
+        
+    }
+    li.item > .pUp::before{
+        display: inline-block;
+        text-align: unset;;
+        background-color: white;
+        color: red;
+        
+        content: '\25B2';
+        margin-left: 10px;
+    }
+
+    li.item > .pDown::after{
+        display: inline-block;
+        text-align: unset;;
+        background-color: white;
+        color: blue;
+       
+        content: '\25BC';
+        margin-left: 10px;
+    }
+
+
     .refBtn {
         width : 20px;
         height: 20px;
