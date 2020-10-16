@@ -13,9 +13,9 @@
     
     <board>
         <div class="description">
-            <h1>Draggable List Structures</h1>
+            <h1>Task Board</h1>
 
-            <p>Click and hold the mouse button down while moving the list</p>
+            
         </div>
     
     <button onclick="addListUtils.addListToBoard()"> Click For Another List</button>
@@ -317,7 +317,7 @@ var debugMe = true;
 
                             ls = `
                                         <li class="item">
-                                            <div class="pUp"></div>
+                                            <div class="pUp" onclick="increasePriority(event)" ></div>
                                             <div class="pDown"></div>
                                             <i class="fa {DONE}" job="complete" id = "{id}"></i>
                                             <p class="text {LINE}"> ${specificListItem} </p>
@@ -498,7 +498,7 @@ var debugMe = true;
                 //listStructure = `<p>#${n+1}. ${targetInputElementValue} </p>`;
                 listStructure = `
                                 <li class="item">
-                                    <div class="pUp"></div>
+                                    <div class="pUp" onclick="increasePriority(event)"></div>
                                     <div class="pDown"></div>
                                     <i class="fa {DONE}" job="complete" id = "{id}"></i>
                                     <p class="text {LINE}"> ${targetInputElementValue} </p>
@@ -692,6 +692,22 @@ var debugMe = true;
 
 
     }
+
+    //priority up function
+    function increasePriority(te)
+    {
+        console.log(`Increase Priority of... `);
+        console.log(te);
+        console.log(te.target);
+        console.log(te.target.parentNode);
+        console.log(te.target.parentNode.parentNode);
+
+        console.log("boardindex is...");
+        console.log(te.target.parentNode.parentNode.getAttribute("boardindex"));
+
+
+    }
+
 </script>
 
 </body>
