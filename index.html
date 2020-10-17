@@ -51,6 +51,118 @@ var debugMe = true;
     
     */
     var itemUtils = {
+        priorUp(event)
+        {
+            // p(" ");
+            // p(" ");
+            // f(`itemUtils.priorUp() called `);
+
+            var element = event.target.parentNode;
+            //
+            var elementTrashIcon = element.getElementsByClassName("de fa fa-trash-o delete")[0];
+            //
+            
+            var bIndex = parseInt(elementTrashIcon.getAttribute("bin"));
+            var arrayIndex = parseInt(elementTrashIcon.getAttribute("arrIn"));
+            
+            // f("     element");p(element);
+            // f(`     board Index:  ${bIndex} `);
+            // f(`     list element: ${arrayIndex} `);
+            //f("     Element above it is... ");
+            
+            
+            
+            var ind = event.target.parentNode.getElementsByClassName("de fa fa-trash-o delete")[0].getAttribute("arrin");
+            if(ind > 0) //if this target element is not the first on the list (index 0)
+            {
+                var i = arrayIndex;
+                //
+                var containingList = element.parentNode;
+                f("     containing List is...");
+                p(containingList);
+                f("     array of items on html look like...");
+                var itemsInsideContainingList = containingList.getElementsByClassName("item");
+                p(itemsInsideContainingList);
+
+                //step one change the inner html of the text
+                    //save the current one
+                var tttempVar = itemsInsideContainingList[i].getElementsByClassName("text")[0].innerHTML ;
+                    //update the current one
+                itemsInsideContainingList[i].getElementsByClassName("text")[0].innerHTML = itemsInsideContainingList[i-1].getElementsByClassName("text")[0].innerHTML ;
+                    //use the saved one to update the new one
+                itemsInsideContainingList[i-1].getElementsByClassName("text")[0].innerHTML = tttempVar;
+
+                //p("BLACK MAGIC TIME");
+                var listTemp = BOARD[bIndex].arrayOfItemsFromList;
+                [ listTemp[i], listTemp[i-1] ] = [listTemp[i-1], listTemp[i] ];
+                //p(listTemp);
+                BOARD[bIndex].arrayOfItemsFromList = listTemp;
+                //listTemp = BOARD[bIndex].arrayOfItemsFromLis
+                //p(" SAVING DATA ");
+                localStorage.setItem("BOARD",JSON.stringify(BOARD));
+            } else {
+                //do nothing, this thing is top priority
+            }
+        }
+        ,
+        priorDw(event)
+        {
+            p("itemUtils.priorDw() CALLED");
+            var element = event.target;
+
+
+            var element = event.target.parentNode;
+            //
+            var elementTrashIcon = element.getElementsByClassName("de fa fa-trash-o delete")[0];
+            //
+            
+            var bIndex = parseInt(elementTrashIcon.getAttribute("bin"));
+            var arrayIndex = parseInt(elementTrashIcon.getAttribute("arrIn"));
+            
+            // f("     element");p(element);
+            // f(`     board Index:  ${bIndex} `);
+            // f(`     list element: ${arrayIndex} `);
+            //f("     Element above it is... ");
+            
+            
+            
+            var ind = event.target.parentNode.getElementsByClassName("de fa fa-trash-o delete")[0].getAttribute("arrin");
+            p(ind);
+            p(element.parentNode.getElementsByClassName("item").length);
+            
+            if(ind < element.parentNode.getElementsByClassName("item").length-1) //if this target element is not the first on the list (index 0)
+            {
+                var i = arrayIndex;
+                //
+                var containingList = element.parentNode;
+                f("     containing List is...");
+                p(containingList);
+                f("     array of items on html look like...");
+                var itemsInsideContainingList = containingList.getElementsByClassName("item");
+                p(itemsInsideContainingList);
+
+                //step one change the inner html of the text
+                    //save the current one
+                var tttempVar = itemsInsideContainingList[i].getElementsByClassName("text")[0].innerHTML ;
+                    //update the current one
+                itemsInsideContainingList[i].getElementsByClassName("text")[0].innerHTML = itemsInsideContainingList[i+1].getElementsByClassName("text")[0].innerHTML ;
+                    //use the saved one to update the new one
+                itemsInsideContainingList[i+1].getElementsByClassName("text")[0].innerHTML = tttempVar;
+
+                //p("BLACK MAGIC TIME");
+                var listTemp = BOARD[bIndex].arrayOfItemsFromList;
+                [ listTemp[i], listTemp[i+1] ] = [listTemp[i+1], listTemp[i] ];
+                //p(listTemp);
+                BOARD[bIndex].arrayOfItemsFromList = listTemp;
+                //listTemp = BOARD[bIndex].arrayOfItemsFromLis
+                //p(" SAVING DATA ");
+                localStorage.setItem("BOARD",JSON.stringify(BOARD));
+            } else {
+                //do nothing, this thing is top priority
+            }
+
+        }
+        ,
         removeItem(event){
             //delete the parent
             var element = event.target;
@@ -237,8 +349,8 @@ var debugMe = true;
                     var listCode;
                     for(var i = 0 ; i < boardObject.length; i++){
                         if (boardObject[i] != 'NaN' && boardObject[i] != null && boardObject[i] != ''){
-                            console.log("___");
-                            console.log(i+": "+boardObject[i]+" is not null");
+                            p(" ");
+                            console.log("   boardObject-"+i+": "+boardObject[i]+" is not null");
                             //console.log(`<<== ${boardObject[i].listTitleString} ==>>>`  );
                             //console.log(boardObject[i]);
 
@@ -310,23 +422,27 @@ var debugMe = true;
                             var tie = document.getElementById(bobId);
                             var specificListItem;
                             var ls;
+
+                            console.log("   This list has "+boardObject[i].arrayOfItemsFromList.length+" items in it.");
                             for(var j = 0 ; j < boardObject[i].arrayOfItemsFromList.length ; j++){
                             //for each element of the list we need to add that to the list on the window
-                            //console.log("   "+boardObject[i].arrayOfItemsFromList[j]);
+                                
+
                             specificListItem = boardObject[i].arrayOfItemsFromList[j];
+                            p("     item #"+j+" is "+specificListItem);
 
                             ls = `
                                         <li class="item">
-                                            <div class="pUp" onclick="increasePriority(event)" ></div>
-                                            <div class="pDown"></div>
-                                            <i class="fa {DONE}" job="complete" id = "{id}"></i>
+                                            <div class="pUp" onclick = "itemUtils.priorUp(event)" ></div>
+                                            <div class="pDown" onclick = "itemUtils.priorDw(event)"></div>
+                                            <i class="fa {DONE}" job="complete" ></i>
                                             <p class="text {LINE}"> ${specificListItem} </p>
                                             <i class="de fa fa-trash-o delete" job="delete" id = "${bobId+"-"+j}" bIn="${i}" arrIn="${j}" onclick="itemUtils.removeItem(event)"></i>
                                         </li>
                             `
                             tie.insertAdjacentHTML('beforeend',ls);
                         } 
-                            //console.log(`<<<============================================>>>`);
+                            console.log(`<<<============================================>>>`);
                         } else {
                             console.log("___");
                             console.log(i+": "+boardObject[i]+" is null!!!");
@@ -380,14 +496,14 @@ var debugMe = true;
     */
     function f(strang){
         d=new Date();
-        console.log(`   ${strang}@${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}:${d.getMilliseconds()}`);
+        console.log(`   ${strang} @${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}:${d.getMilliseconds()}`);
     }
 
     /**
         easier print function
     */
     function p(pr){
-        console.log(`${pr}`);
+        console.log(pr);
     }
 
     //object literal for changing header titles
@@ -498,8 +614,8 @@ var debugMe = true;
                 //listStructure = `<p>#${n+1}. ${targetInputElementValue} </p>`;
                 listStructure = `
                                 <li class="item">
-                                    <div class="pUp" onclick="increasePriority(event)"></div>
-                                    <div class="pDown"></div>
+                                    <div class="pUp" onclick = "itemUtils.priorUp(event)" ></div>
+                                    <div class="pDown" onclick = "itemUtils.priorDw(event)"></div>
                                     <i class="fa {DONE}" job="complete" id = "{id}"></i>
                                     <p class="text {LINE}"> ${targetInputElementValue} </p>
                                     <i class="de fa fa-trash-o delete" job="delete" id = "{bobId+"-"+j}" bIn="${targetInputElement.getAttribute("boardIndex")}" arrIn="${n+1}" onclick="itemUtils.removeItem(event)"></i>
@@ -693,20 +809,7 @@ var debugMe = true;
 
     }
 
-    //priority up function
-    function increasePriority(te)
-    {
-        console.log(`Increase Priority of... `);
-        console.log(te);
-        console.log(te.target);
-        console.log(te.target.parentNode);
-        console.log(te.target.parentNode.parentNode);
-
-        console.log("boardindex is...");
-        console.log(te.target.parentNode.parentNode.getAttribute("boardindex"));
-
-
-    }
+    
 
 </script>
 
